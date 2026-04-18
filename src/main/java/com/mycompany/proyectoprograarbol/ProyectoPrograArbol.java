@@ -1,16 +1,10 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- */
 
 package com.mycompany.proyectoprograarbol;
 
-/**
- *
- * @author allan
- */
+
 public class ProyectoPrograArbol {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        System.out.println("Probando David x Jhon");
     }
 }
