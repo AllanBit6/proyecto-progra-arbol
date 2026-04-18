@@ -49,17 +49,24 @@ public class CustomerService implements ICustomerService {
     @Override
     public boolean updateCustomer(List<Customer> customers) {
         Transaction transaction = null;
+        Session session = null;
 
-        try (Session session = sessionFactory.openSession()) {
+        try {
+            session = sessionFactory.openSession();
             transaction = session.beginTransaction();
 
             List<Customer> customersToUpdate = new ArrayList<>();
             List<Customer> customersToDelete = new ArrayList<>();
 
-            List<Customer> newCustomers = customers.stream().filter(item -> item.getId() == null).toList();
-            List<Customer> customersFiltered = customers.stream().filter(item -> item.getId() != null).toList();
-            List<Customer> currentCustomers = session.createQuery("FROM Customer", Customer.class).getResultList();
+            List<Customer> newCustomers = customers.stream()
+                    .filter(item -> item.getId() == null).toList();
 
+            List<Customer> customersFiltered = customers.stream()
+                    .filter(item -> item.getId() != null).toList();
+
+            List<Customer> currentCustomers = session
+                    .createQuery("FROM Customer", Customer.class)
+                    .getResultList();
 
             Map<Long, Customer> map = new HashMap<>();
 
@@ -82,11 +89,19 @@ public class CustomerService implements ICustomerService {
 
             transaction.commit();
             return true;
+
         } catch (Exception e) {
-            if (transaction != null) {
+
+            if (transaction != null && transaction.isActive()) {
                 transaction.rollback();
             }
-            throw new RuntimeException("Error en Error al actualizar tabla de clientes", e);
+
+            throw new RuntimeException("Error al actualizar clientes", e);
+
+        } finally {
+            if (session != null && session.isOpen()) {
+                session.close();
+            }
         }
     }
 

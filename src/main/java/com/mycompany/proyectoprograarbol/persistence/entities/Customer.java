@@ -28,12 +28,12 @@ public class Customer {
     private String code;
 
     @Column(name = "balance")
-    private double balance;
+    private Double balance;
 
     public Customer() {
     }
 
-    public Customer(Long id, String name, String grade, String code, double globalAverage) {
+    public Customer(Long id, String name, String grade, String code, Double globalAverage) {
         this.id = id;
         this.name = name;
         this.address = grade;
@@ -73,11 +73,11 @@ public class Customer {
         this.code = code;
     }
 
-    public double getBalance() {
+    public Double getBalance() {
         return balance;
     }
 
-    public void setBalance(double balance) {
+    public void setBalance(Double balance) {
         this.balance = balance;
     }
 
