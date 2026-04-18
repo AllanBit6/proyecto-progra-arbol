@@ -15,6 +15,7 @@ public interface ICustomerService {
     
     ArrayList<Customer> getAll();
     
+    //Metodo unico para insertar, actualizar o eliminar
     boolean updateCustomer(ArrayList<Customer> customers);
     
 }
