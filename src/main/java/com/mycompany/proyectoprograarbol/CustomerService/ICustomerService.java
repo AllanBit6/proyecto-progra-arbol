@@ -4,7 +4,7 @@
  */
 package com.mycompany.proyectoprograarbol.CustomerService;
 
-import com.mycompany.proyectoprograarbol.entities.Customer;
+import com.mycompany.proyectoprograarbol.persistence.entities.Customer;
 import java.util.ArrayList;
 
 /**
