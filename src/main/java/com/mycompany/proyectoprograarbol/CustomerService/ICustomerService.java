@@ -5,7 +5,7 @@
 package com.mycompany.proyectoprograarbol.CustomerService;
 
 import com.mycompany.proyectoprograarbol.persistence.entities.Customer;
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -13,9 +13,9 @@ import java.util.ArrayList;
  */
 public interface ICustomerService {
     
-    ArrayList<Customer> getAll();
+    List<Customer> getAll();
     
     //Metodo unico para insertar, actualizar o eliminar
-    boolean updateCustomer(ArrayList<Customer> customers);
+    boolean updateCustomer(List<Customer> customers);
     
 }
