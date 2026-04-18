@@ -27,7 +27,7 @@ public class CustomerService implements ICustomerService {
     }
 
     @Override
-    public List<Customer> getAll() {
+    public List<Customer> findAllCustomers() {
         Transaction transaction = null;
 
         try (Session session = sessionFactory.openSession();) {
@@ -47,7 +47,7 @@ public class CustomerService implements ICustomerService {
     }
 
     @Override
-    public boolean updateCustomer(List<Customer> customers) {
+    public boolean syncCustomers(List<Customer> customers) {
         Transaction transaction = null;
         Session session = null;
 
