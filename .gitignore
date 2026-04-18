@@ -1,0 +1,27 @@
+# Maven
+
+target/
+!.mvn/wrapper/maven-wrapper.jar
+
+# NetBeans
+
+nbproject/private/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
+
+# Logs
+
+*.log
+
+# OS files
+
+.DS_Store
+Thumbs.db
+
+# IDEs opcionales (por si usas otros)
+
+.idea/
+*.iml
+.vscode/
