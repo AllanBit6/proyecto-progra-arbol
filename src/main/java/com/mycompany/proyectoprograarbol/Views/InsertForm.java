@@ -29,12 +29,15 @@ public class InsertForm extends javax.swing.JFrame {
 
         jLabel3.setText("Saldo");
 
+        balanceEntry.setModel(new javax.swing.SpinnerNumberModel(0.0d, null, null, 1.0d));
+
         directionEntry.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Totonicapan", "Quetzaltenango", "Quiche", "San Marcos", "Solola", "El Progreso", "Huehuetenango", "Guatemala" }));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel4.setText("Insertar Cliente");
 
         addButton.setText("Agregar");
+        addButton.addActionListener(this::addButtonActionPerformed);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -81,6 +84,14 @@ public class InsertForm extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
+        String name = nameEntry.getText();
+        String address = directionEntry.getSelectedItem().toString();
+        double balance = (double)balanceEntry.getValue();
+        
+        System.out.println(name + address + balance);
+    }//GEN-LAST:event_addButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addButton;

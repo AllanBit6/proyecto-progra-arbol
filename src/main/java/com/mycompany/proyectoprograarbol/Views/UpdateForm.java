@@ -34,7 +34,10 @@ public class UpdateForm extends javax.swing.JFrame {
 
         jLabel3.setText("Saldo");
 
+        balanceEntry.setModel(new javax.swing.SpinnerNumberModel(0.0d, null, null, 1.0d));
+
         addButton.setText("Agregar");
+        addButton.addActionListener(this::addButtonActionPerformed);
 
         jLabel5.setText("ID");
 
@@ -97,6 +100,10 @@ public class UpdateForm extends javax.swing.JFrame {
     private void idEntryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_idEntryActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_idEntryActionPerformed
+
+    private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
+        
+    }//GEN-LAST:event_addButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addButton;
