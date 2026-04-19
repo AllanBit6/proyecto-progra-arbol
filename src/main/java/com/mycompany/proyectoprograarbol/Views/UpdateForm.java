@@ -1,5 +1,7 @@
 package com.mycompany.proyectoprograarbol.Views;
 
+import javax.swing.JOptionPane;
+
 public class UpdateForm extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(UpdateForm.class.getName());
@@ -36,11 +38,12 @@ public class UpdateForm extends javax.swing.JFrame {
 
         balanceEntry.setModel(new javax.swing.SpinnerNumberModel(0.0d, null, null, 1.0d));
 
-        addButton.setText("Agregar");
+        addButton.setText("Actualizar");
         addButton.addActionListener(this::addButtonActionPerformed);
 
         jLabel5.setText("ID");
 
+        idEntry.setText("0");
         idEntry.addActionListener(this::idEntryActionPerformed);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -97,13 +100,22 @@ public class UpdateForm extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
+        int id = Integer.parseInt(idEntry.getText());
+        String name = nameEntry.getText();
+        String address = directionEntry.getSelectedItem().toString();
+        double balance = (double)balanceEntry.getValue();
+        
+        if(nameEntry.getText().isEmpty() || idEntry.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Se deben rellenar todos los campos");
+        }else{
+          System.out.println(id + name + address + balance);  //-------Cambiar por el servicio
+        }
+    }//GEN-LAST:event_addButtonActionPerformed
+
     private void idEntryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_idEntryActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_idEntryActionPerformed
-
-    private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
-        
-    }//GEN-LAST:event_addButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addButton;

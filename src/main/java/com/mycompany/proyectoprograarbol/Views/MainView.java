@@ -126,11 +126,11 @@ public class MainView extends javax.swing.JFrame {
                         .addComponent(updateButton)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(viewButton, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
-                .addComponent(loadButton)
-                .addGap(37, 37, 37)
-                .addComponent(saveButton)
-                .addGap(98, 98, 98))
+                .addGap(60, 60, 60)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(saveButton, javax.swing.GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE)
+                    .addComponent(loadButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(139, 139, 139))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -147,11 +147,12 @@ public class MainView extends javax.swing.JFrame {
                     .addComponent(deleteButton)
                     .addComponent(updateButton)
                     .addComponent(loadButton)
-                    .addComponent(saveButton)
                     .addComponent(viewButton))
-                .addGap(18, 18, 18)
-                .addComponent(trailsButton)
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(trailsButton)
+                    .addComponent(saveButton))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
 
         pack();

@@ -1,5 +1,7 @@
 package com.mycompany.proyectoprograarbol.Views;
 
+import javax.swing.JOptionPane;
+
 public class DeleteForm extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(DeleteForm.class.getName());
@@ -21,9 +23,12 @@ public class DeleteForm extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel4.setText("Eliminar Cliente");
 
+        idEntry.setText("0");
+
         jLabel1.setText("ID del cliente");
 
         deleteButton.setText("Eliminar");
+        deleteButton.addActionListener(this::deleteButtonActionPerformed);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -58,6 +63,16 @@ public class DeleteForm extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
+        int id = Integer.parseInt(idEntry.getText());
+               
+        if(idEntry.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Se deben rellenar todos los campos");
+        }else{
+          System.out.println(id);  //-------Cambiar por el servicio
+        }
+    }//GEN-LAST:event_deleteButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton deleteButton;
