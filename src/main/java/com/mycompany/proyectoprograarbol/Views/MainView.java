@@ -1,4 +1,7 @@
 package com.mycompany.proyectoprograarbol.Views;
+import com.mxgraph.view.mxGraph;
+import com.mxgraph.swing.mxGraphComponent;
+import com.mxgraph.layout.mxCompactTreeLayout;
 
 public class MainView extends javax.swing.JFrame {
     
@@ -6,6 +9,44 @@ public class MainView extends javax.swing.JFrame {
 
     public MainView() {
         initComponents();
+        
+        jPanel1.setPreferredSize(new java.awt.Dimension(800, 300));
+        jPanel1.setMinimumSize(new java.awt.Dimension(800, 300));
+        
+        drawTree();
+    }
+    
+    private void drawTree() {
+        mxGraph graph = new mxGraph();
+        Object parent = graph.getDefaultParent();
+
+        graph.getModel().beginUpdate();
+        try {
+            // Nodos
+            Object root = graph.insertVertex(parent, null, "A", 0, 0, 40, 40);
+            Object left = graph.insertVertex(parent, null, "B", 0, 0, 40, 40);
+            Object right = graph.insertVertex(parent, null, "C", 0, 0, 40, 40);
+
+            // Conexiones
+            graph.insertEdge(parent, null, "", root, left);
+            graph.insertEdge(parent, null, "", root, right);
+
+        } finally {
+            graph.getModel().endUpdate();
+        }
+
+        mxCompactTreeLayout layout = new mxCompactTreeLayout(graph);
+        layout.execute(parent);
+        
+        mxGraphComponent graphComponent = new mxGraphComponent(graph);
+        jPanel1.setLayout(new java.awt.BorderLayout());
+        jPanel1.add(graphComponent, java.awt.BorderLayout.CENTER);
+
+        jPanel1.removeAll();
+        jPanel1.setLayout(new java.awt.BorderLayout());
+        jPanel1.add(graphComponent, java.awt.BorderLayout.CENTER);
+        jPanel1.revalidate();
+        jPanel1.repaint();
     }
 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -20,6 +61,7 @@ public class MainView extends javax.swing.JFrame {
         loadButton = new javax.swing.JButton();
         saveButton = new javax.swing.JButton();
         trailsButton = new javax.swing.JButton();
+        viewButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -55,6 +97,9 @@ public class MainView extends javax.swing.JFrame {
         trailsButton.setText("Recorridos");
         trailsButton.addActionListener(this::trailsButtonActionPerformed);
 
+        viewButton.setText("Ver Registros Completos");
+        viewButton.addActionListener(this::viewButtonActionPerformed);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -80,6 +125,8 @@ public class MainView extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(updateButton)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(viewButton, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
                 .addComponent(loadButton)
                 .addGap(37, 37, 37)
                 .addComponent(saveButton)
@@ -100,7 +147,8 @@ public class MainView extends javax.swing.JFrame {
                     .addComponent(deleteButton)
                     .addComponent(updateButton)
                     .addComponent(loadButton)
-                    .addComponent(saveButton))
+                    .addComponent(saveButton)
+                    .addComponent(viewButton))
                 .addGap(18, 18, 18)
                 .addComponent(trailsButton)
                 .addContainerGap(29, Short.MAX_VALUE))
@@ -133,6 +181,11 @@ public class MainView extends javax.swing.JFrame {
         form.setVisible(true);
     }//GEN-LAST:event_trailsButtonActionPerformed
 
+    private void viewButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewButtonActionPerformed
+        RecordsForms form = new RecordsForms();
+        form.setVisible(true);
+    }//GEN-LAST:event_viewButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton deleteButton;
@@ -144,5 +197,6 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JButton saveButton;
     private javax.swing.JButton trailsButton;
     private javax.swing.JButton updateButton;
+    private javax.swing.JButton viewButton;
     // End of variables declaration//GEN-END:variables
 }

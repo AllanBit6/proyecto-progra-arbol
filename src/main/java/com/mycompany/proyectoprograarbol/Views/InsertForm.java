@@ -1,5 +1,7 @@
 package com.mycompany.proyectoprograarbol.Views;
 
+import javax.swing.JOptionPane;
+
 public class InsertForm extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(InsertForm.class.getName());
@@ -90,7 +92,12 @@ public class InsertForm extends javax.swing.JFrame {
         String address = directionEntry.getSelectedItem().toString();
         double balance = (double)balanceEntry.getValue();
         
-        System.out.println(name + address + balance);
+        if(nameEntry.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Se deben rellenar todos los campos");
+        }else{
+          System.out.println(name + address + balance);  //-------Cambiar por el servicio
+        }
+        
     }//GEN-LAST:event_addButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

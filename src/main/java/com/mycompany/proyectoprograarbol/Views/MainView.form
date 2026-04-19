@@ -48,6 +48,8 @@
                   </Group>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
+              <Component id="viewButton" min="-2" pref="253" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
               <Component id="loadButton" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
               <Component id="saveButton" min="-2" max="-2" attributes="0"/>
@@ -72,6 +74,7 @@
                   <Component id="updateButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="loadButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="saveButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="viewButton" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="trailsButton" min="-2" max="-2" attributes="0"/>
@@ -149,6 +152,14 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="trailsButtonActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="viewButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Ver Registros Completos"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="viewButtonActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>
