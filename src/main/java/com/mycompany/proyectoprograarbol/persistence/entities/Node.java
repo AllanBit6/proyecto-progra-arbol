@@ -4,6 +4,7 @@ public class Node {
     public Node left = null;
     public Node right = null;
     public Customer data = null;
+    public int height = 1; 
     
     public Node(){    
     }
