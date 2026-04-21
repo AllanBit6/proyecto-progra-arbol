@@ -129,6 +129,7 @@ public class UpdateForm extends javax.swing.JFrame {
             sv.updateNode(customer);
 
             JOptionPane.showMessageDialog(null, "Editado exitosamente");
+            this.dispose();
 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error al editar: " + e.getMessage());

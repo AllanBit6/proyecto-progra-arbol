@@ -180,6 +180,14 @@ public class MainView extends javax.swing.JFrame {
 
     private void insertButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertButtonActionPerformed
         InsertForm form = new InsertForm(service);
+        
+        form.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosed(java.awt.event.WindowEvent e) {
+                drawTree(service.getTreeAsync());
+            }
+        });
+        
         form.setVisible(true);
     }//GEN-LAST:event_insertButtonActionPerformed
 
@@ -190,11 +198,27 @@ public class MainView extends javax.swing.JFrame {
 
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
         DeleteForm form = new DeleteForm(service);
+        
+        form.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosed(java.awt.event.WindowEvent e) {
+                drawTree(service.getTreeAsync());
+            }
+        });
+        
         form.setVisible(true);
     }//GEN-LAST:event_deleteButtonActionPerformed
 
     private void updateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateButtonActionPerformed
         UpdateForm form = new UpdateForm(service);
+        
+        form.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosed(java.awt.event.WindowEvent e) {
+                drawTree(service.getTreeAsync());
+            }
+        });
+        
         form.setVisible(true);
     }//GEN-LAST:event_updateButtonActionPerformed
 

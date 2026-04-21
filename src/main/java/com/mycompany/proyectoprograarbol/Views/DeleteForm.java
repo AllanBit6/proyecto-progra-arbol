@@ -90,6 +90,7 @@ public class DeleteForm extends javax.swing.JFrame {
             sv.deleteNode(customer);
 
             JOptionPane.showMessageDialog(null, "Eliminado exitosamente");
+            this.dispose();
 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error al eliminar: " + e.getMessage());
