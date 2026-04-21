@@ -2,6 +2,8 @@ package com.mycompany.proyectoprograarbol.Views;
 import com.mxgraph.view.mxGraph;
 import com.mxgraph.swing.mxGraphComponent;
 import com.mxgraph.layout.mxCompactTreeLayout;
+import com.mycompany.proyectoprograarbol.Services.TreeService;
+import com.mycompany.proyectoprograarbol.persistence.entities.*;
 
 public class MainView extends javax.swing.JFrame {
     
@@ -10,37 +12,33 @@ public class MainView extends javax.swing.JFrame {
     public MainView() {
         initComponents();
         
+        TreeService service = new TreeService();
         jPanel1.setPreferredSize(new java.awt.Dimension(800, 300));
         jPanel1.setMinimumSize(new java.awt.Dimension(800, 300));
         
-        drawTree();
+        Node raiz = service.getTreeAsync();
+        
+        System.out.println(raiz.data.getName());
+        drawTree(raiz);
     }
     
-    private void drawTree() {
+    private void drawTree(Node raiz) {
         mxGraph graph = new mxGraph();
         Object parent = graph.getDefaultParent();
 
         graph.getModel().beginUpdate();
         try {
-            // Nodos
-            Object root = graph.insertVertex(parent, null, "A", 0, 0, 40, 40);
-            Object left = graph.insertVertex(parent, null, "B", 0, 0, 40, 40);
-            Object right = graph.insertVertex(parent, null, "C", 0, 0, 40, 40);
-
-            // Conexiones
-            graph.insertEdge(parent, null, "", root, left);
-            graph.insertEdge(parent, null, "", root, right);
-
+            if (raiz != null) {
+                drawNode(graph, parent, raiz, null, 200, 50, 100);
+            }
         } finally {
             graph.getModel().endUpdate();
         }
 
         mxCompactTreeLayout layout = new mxCompactTreeLayout(graph);
-        layout.execute(parent);
-        
+        layout.execute(graph.getDefaultParent());
+
         mxGraphComponent graphComponent = new mxGraphComponent(graph);
-        jPanel1.setLayout(new java.awt.BorderLayout());
-        jPanel1.add(graphComponent, java.awt.BorderLayout.CENTER);
 
         jPanel1.removeAll();
         jPanel1.setLayout(new java.awt.BorderLayout());
@@ -48,7 +46,29 @@ public class MainView extends javax.swing.JFrame {
         jPanel1.revalidate();
         jPanel1.repaint();
     }
+    
+    private Object drawNode(mxGraph graph, Object parent, Node nodo,
+        Object parentVertex, int x, int y, int offset) {
 
+        if (nodo == null) return null;
+
+        String label = nodo.data.getName();
+
+        Object vertex = graph.insertVertex(parent, null, label, x, y, 60, 40);
+
+        if (parentVertex != null) {
+            graph.insertEdge(parent, null, "", parentVertex, vertex);
+        }
+        drawNode(graph, parent, nodo.left, vertex,
+                 x - offset, y + 80, offset / 2);
+        drawNode(graph, parent, nodo.right, vertex,
+                 x + offset, y + 80, offset / 2);
+
+        return vertex;
+    }
+    
+    
+    
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
