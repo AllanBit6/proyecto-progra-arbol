@@ -1,6 +1,6 @@
 package com.mycompany.proyectoprograarbol.persistence.entities;
 
-import com.mycompany.proyectoprograarbol.CustomerService.CustomerService;
+import com.mycompany.proyectoprograarbol.dao.CustomerRepository;
 import java.util.ArrayList;
 import java.util.List;
 

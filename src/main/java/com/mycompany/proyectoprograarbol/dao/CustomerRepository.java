@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.mycompany.proyectoprograarbol.CustomerService;
+package com.mycompany.proyectoprograarbol.dao;
 
 import com.mycompany.proyectoprograarbol.persistence.entities.Customer;
 import com.mycompany.proyectoprograarbol.persistence.hibernate.HibernateUtil;
@@ -18,11 +18,11 @@ import org.hibernate.Transaction;
  *
  * @author Admin
  */
-public class CustomerService implements ICustomerService {
+public class CustomerRepository implements ICustomerRepository {
 
     private SessionFactory sessionFactory;
 
-    public CustomerService() {
+    public CustomerRepository() {
         sessionFactory = HibernateUtil.getSessionFactory();
     }
 

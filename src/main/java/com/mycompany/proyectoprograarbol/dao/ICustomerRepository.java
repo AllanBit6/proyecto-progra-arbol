@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
  */
-package com.mycompany.proyectoprograarbol.CustomerService;
+package com.mycompany.proyectoprograarbol.dao;
 
 import com.mycompany.proyectoprograarbol.persistence.entities.Customer;
 import java.util.List;
@@ -11,7 +11,7 @@ import java.util.List;
  *
  * @author Admin
  */
-public interface ICustomerService {
+public interface ICustomerRepository {
 
     /**
      * Obtiene todos los clientes almacenados en la base de datos.
