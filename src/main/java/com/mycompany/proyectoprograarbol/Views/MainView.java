@@ -4,22 +4,21 @@ import com.mxgraph.swing.mxGraphComponent;
 import com.mxgraph.layout.mxCompactTreeLayout;
 import com.mycompany.proyectoprograarbol.Services.TreeService;
 import com.mycompany.proyectoprograarbol.persistence.entities.*;
+import javax.swing.JOptionPane;
 
 public class MainView extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(MainView.class.getName());
-
+    private Node raiz;
+    private TreeService service = new TreeService();
+    
     public MainView() {
         initComponents();
         
-        TreeService service = new TreeService();
+        
         jPanel1.setPreferredSize(new java.awt.Dimension(800, 300));
         jPanel1.setMinimumSize(new java.awt.Dimension(800, 300));
         
-        Node raiz = service.getTreeAsync();
-        
-        System.out.println(raiz.data.getName());
-        drawTree(raiz);
     }
     
     private void drawTree(Node raiz) {
@@ -113,6 +112,7 @@ public class MainView extends javax.swing.JFrame {
         loadButton.addActionListener(this::loadButtonActionPerformed);
 
         saveButton.setText("Guardar");
+        saveButton.addActionListener(this::saveButtonActionPerformed);
 
         trailsButton.setText("Recorridos");
         trailsButton.addActionListener(this::trailsButtonActionPerformed);
@@ -179,26 +179,27 @@ public class MainView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void insertButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertButtonActionPerformed
-        InsertForm form = new InsertForm();
+        InsertForm form = new InsertForm(service);
         form.setVisible(true);
     }//GEN-LAST:event_insertButtonActionPerformed
 
     private void loadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadButtonActionPerformed
-        // TODO add your handling code here:
+        raiz = service.getTreeAsync();
+        drawTree(raiz);
     }//GEN-LAST:event_loadButtonActionPerformed
 
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
-        DeleteForm form = new DeleteForm();
+        DeleteForm form = new DeleteForm(service);
         form.setVisible(true);
     }//GEN-LAST:event_deleteButtonActionPerformed
 
     private void updateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateButtonActionPerformed
-        UpdateForm form = new UpdateForm();
+        UpdateForm form = new UpdateForm(service);
         form.setVisible(true);
     }//GEN-LAST:event_updateButtonActionPerformed
 
     private void trailsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_trailsButtonActionPerformed
-        TrailForm form = new TrailForm();
+        TrailForm form = new TrailForm(service);
         form.setVisible(true);
     }//GEN-LAST:event_trailsButtonActionPerformed
 
@@ -206,6 +207,16 @@ public class MainView extends javax.swing.JFrame {
         RecordsForms form = new RecordsForms();
         form.setVisible(true);
     }//GEN-LAST:event_viewButtonActionPerformed
+
+    private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
+        
+        try{
+            service.saveAsync();
+            JOptionPane.showMessageDialog(null, "Sincronizado con BD exitosamente");
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Ocurrio un error al sincronizar con BD");
+        }
+    }//GEN-LAST:event_saveButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

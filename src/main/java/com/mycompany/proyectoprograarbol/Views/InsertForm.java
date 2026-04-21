@@ -1,13 +1,16 @@
 package com.mycompany.proyectoprograarbol.Views;
-
+import com.mycompany.proyectoprograarbol.Services.TreeService;
+import com.mycompany.proyectoprograarbol.persistence.entities.*;
 import javax.swing.JOptionPane;
 
 public class InsertForm extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(InsertForm.class.getName());
-
-    public InsertForm() {
+    TreeService sv;
+    
+    public InsertForm(TreeService service) {
         initComponents();
+        sv = service;
     }
 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -21,6 +24,8 @@ public class InsertForm extends javax.swing.JFrame {
         directionEntry = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
         addButton = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        codeEntry = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(204, 255, 204));
@@ -41,6 +46,8 @@ public class InsertForm extends javax.swing.JFrame {
         addButton.setText("Agregar");
         addButton.addActionListener(this::addButtonActionPerformed);
 
+        jLabel5.setText("Codigo");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -53,13 +60,15 @@ public class InsertForm extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(40, 40, 40)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel5)
                             .addComponent(jLabel1)
                             .addComponent(jLabel2)
                             .addComponent(jLabel3)
                             .addComponent(nameEntry)
                             .addComponent(balanceEntry, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(directionEntry, 0, 221, Short.MAX_VALUE)
-                            .addComponent(addButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(addButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(codeEntry))))
                 .addContainerGap(43, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -75,11 +84,15 @@ public class InsertForm extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addGap(8, 8, 8)
                 .addComponent(directionEntry, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(codeEntry, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
                 .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(balanceEntry, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(addButton)
                 .addGap(32, 32, 32))
         );
@@ -90,12 +103,25 @@ public class InsertForm extends javax.swing.JFrame {
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
         String name = nameEntry.getText();
         String address = directionEntry.getSelectedItem().toString();
+        String code = codeEntry.getText();
         double balance = (double)balanceEntry.getValue();
         
         if(nameEntry.getText().isEmpty()){
             JOptionPane.showMessageDialog(null, "Se deben rellenar todos los campos");
         }else{
-          System.out.println(name + address + balance);  //-------Cambiar por el servicio
+            Customer customer = new Customer();
+            customer.setName(name);
+            customer.setBalance(balance);
+            customer.setAddress(address);
+            customer.setCode(code);
+            
+            try{
+               sv.addNode(customer); 
+               JOptionPane.showMessageDialog(null, "Agregado exitosamente");
+            }catch(Exception e){
+                JOptionPane.showMessageDialog(null, "No se pudo agregar el registro");
+            }
+            
         }
         
     }//GEN-LAST:event_addButtonActionPerformed
@@ -103,11 +129,13 @@ public class InsertForm extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addButton;
     private javax.swing.JSpinner balanceEntry;
+    private javax.swing.JTextField codeEntry;
     private javax.swing.JComboBox<String> directionEntry;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JTextField nameEntry;
     // End of variables declaration//GEN-END:variables
 }

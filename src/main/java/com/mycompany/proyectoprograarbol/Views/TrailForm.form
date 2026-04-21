@@ -70,7 +70,7 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JTextArea" name="jTextArea1">
+        <Component class="javax.swing.JTextArea" name="logArea">
           <Properties>
             <Property name="columns" type="int" value="20"/>
             <Property name="rows" type="int" value="5"/>
@@ -82,16 +82,25 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Enorden"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="enordenButtonActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="postordenButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="Postorden"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="postordenButtonActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="preordenButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="Preorden"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="preordenButtonActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel4">
       <Properties>

@@ -1,13 +1,16 @@
 package com.mycompany.proyectoprograarbol.Views;
-
+import com.mycompany.proyectoprograarbol.Services.TreeService;
+import com.mycompany.proyectoprograarbol.persistence.entities.*;
 import javax.swing.JOptionPane;
 
 public class DeleteForm extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(DeleteForm.class.getName());
-
-    public DeleteForm() {
+    TreeService sv;
+    
+    public DeleteForm(TreeService service) {
         initComponents();
+        sv = service;
     }
 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -67,6 +70,8 @@ public class DeleteForm extends javax.swing.JFrame {
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
         int id = Integer.parseInt(idEntry.getText());
                
+        
+        
         if(idEntry.getText().isEmpty()){
             JOptionPane.showMessageDialog(null, "Se deben rellenar todos los campos");
         }else{
