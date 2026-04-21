@@ -4,18 +4,34 @@
  */
 package com.mycompany.proyectoprograarbol.CustomerService;
 
-import com.mycompany.proyectoprograarbol.entities.Customer;
-import java.util.ArrayList;
+import com.mycompany.proyectoprograarbol.persistence.entities.Customer;
+import java.util.List;
 
 /**
  *
  * @author Admin
  */
 public interface ICustomerService {
-    
-    ArrayList<Customer> getAll();
-    
-    //Metodo unico para insertar, actualizar o eliminar
-    boolean updateCustomer(ArrayList<Customer> customers);
-    
+
+    /**
+     * Obtiene todos los clientes almacenados en la base de datos.
+     *
+     * @return Lista de todos los clientes.
+     * @throws RuntimeException si ocurre un error al consultar la información.
+     */
+    List<Customer> findAllCustomers();
+
+    /**
+     * Sincroniza la lista de clientes con la base de datos.
+     *
+     * Actualiza los clientes
+     * Elimina clientes
+     * inserta clientes
+     *
+     * @param customers Lista de clientes a sincronizar.
+     * @return true si la operación se realiza correctamente.
+     * @throws RuntimeException si ocurre algún error durante la transacción.
+     */
+    boolean syncCustomers(List<Customer> customers);
+
 }
