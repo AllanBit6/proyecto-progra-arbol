@@ -86,7 +86,7 @@ public class TrailForm extends javax.swing.JFrame {
         String cad = "";
         
         for(Customer c: lista){
-            cad += c.getName()+"\n";
+            cad += c.getId() + "-" + c.getName() + "-" + c.getCode()+"\n";
         }
         logArea.setText(cad);
         
@@ -98,7 +98,7 @@ public class TrailForm extends javax.swing.JFrame {
         String cad = "";
         
         for(Customer c: lista){
-            cad += c.getName()+"\n";
+            cad += c.getId() + "-" + c.getName() + "-" + c.getCode()+"\n";
         }
         logArea.setText(cad);
     }//GEN-LAST:event_postordenButtonActionPerformed
@@ -109,7 +109,7 @@ public class TrailForm extends javax.swing.JFrame {
         String cad = "";
         
         for(Customer c: lista){
-            cad += c.getName()+"\n";
+            cad += c.getId() + "-" + c.getName() + "-" + c.getCode()+"\n";
         }
         logArea.setText(cad);
     }//GEN-LAST:event_preordenButtonActionPerformed

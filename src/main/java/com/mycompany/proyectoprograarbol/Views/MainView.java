@@ -51,7 +51,7 @@ public class MainView extends javax.swing.JFrame {
 
         if (nodo == null) return null;
 
-        String label = nodo.data.getName();
+        String label = nodo.data.getCode() + "-" + nodo.data.getName();
 
         Object vertex = graph.insertVertex(parent, null, label, x, y, 60, 40);
 

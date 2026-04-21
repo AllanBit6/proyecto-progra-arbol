@@ -23,8 +23,6 @@ public class UpdateForm extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         balanceEntry = new javax.swing.JSpinner();
         addButton = new javax.swing.JButton();
-        jLabel5 = new javax.swing.JLabel();
-        idEntry = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         codeEntry = new javax.swing.JTextField();
 
@@ -46,11 +44,6 @@ public class UpdateForm extends javax.swing.JFrame {
         addButton.setText("Actualizar");
         addButton.addActionListener(this::addButtonActionPerformed);
 
-        jLabel5.setText("ID");
-
-        idEntry.setText("0");
-        idEntry.addActionListener(this::idEntryActionPerformed);
-
         jLabel6.setText("Codigo");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -66,10 +59,6 @@ public class UpdateForm extends javax.swing.JFrame {
                         .addGap(40, 40, 40)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel6)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel5)
-                                .addGap(18, 18, 18)
-                                .addComponent(idEntry))
                             .addComponent(jLabel1)
                             .addComponent(jLabel2)
                             .addComponent(jLabel3)
@@ -77,7 +66,7 @@ public class UpdateForm extends javax.swing.JFrame {
                             .addComponent(balanceEntry, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(directionEntry, 0, 221, Short.MAX_VALUE)
                             .addComponent(addButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(codeEntry))))
+                            .addComponent(codeEntry, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(56, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -85,11 +74,11 @@ public class UpdateForm extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(27, 27, 27)
                 .addComponent(jLabel4)
-                .addGap(19, 19, 19)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(idEntry, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(39, 39, 39)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(codeEntry, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(24, 24, 24)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(nameEntry, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -98,63 +87,63 @@ public class UpdateForm extends javax.swing.JFrame {
                 .addGap(8, 8, 8)
                 .addComponent(directionEntry, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(codeEntry, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(balanceEntry, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(28, 28, 28)
                 .addComponent(addButton)
-                .addGap(32, 32, 32))
+                .addContainerGap(37, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
-        Long id = Long.parseLong(idEntry.getText());
+        String code = codeEntry.getText();
         String name = nameEntry.getText();
         String address = directionEntry.getSelectedItem().toString();
-        String code = codeEntry.getText();
-        double balance = (double)balanceEntry.getValue();
-        
-        if(nameEntry.getText().isEmpty() || idEntry.getText().isEmpty()){
+        double balance = (double) balanceEntry.getValue();
+
+        if (code.isEmpty() || name.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Se deben rellenar todos los campos");
-        }else{
-            
-             Customer customer = new Customer();
-            customer.setId(id); // 👈 importante para update
+            return;
+        }
+
+        try {
+            Customer searchCustomer = new Customer();
+            searchCustomer.setCode(code);
+
+            Node node = sv.searchNode(searchCustomer);
+
+            if (node == null) {
+                JOptionPane.showMessageDialog(null, "Cliente no encontrado");
+                return;
+            }
+
+            Customer customer = node.data;
+
             customer.setName(name);
             customer.setAddress(address);
             customer.setBalance(balance);
-     
-          
-          try{
-               sv.updateNode(customer); 
-               JOptionPane.showMessageDialog(null, "Editado exitosamente");
-            }catch(Exception e){
-                JOptionPane.showMessageDialog(null, "No se pudo editarr el registro");
-            }
+
+            sv.updateNode(customer);
+
+            JOptionPane.showMessageDialog(null, "Editado exitosamente");
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error al editar: " + e.getMessage());
         }
     }//GEN-LAST:event_addButtonActionPerformed
-
-    private void idEntryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_idEntryActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_idEntryActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addButton;
     private javax.swing.JSpinner balanceEntry;
     private javax.swing.JTextField codeEntry;
     private javax.swing.JComboBox<String> directionEntry;
-    private javax.swing.JTextField idEntry;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JTextField nameEntry;
     // End of variables declaration//GEN-END:variables

@@ -17,7 +17,7 @@ public class DeleteForm extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel4 = new javax.swing.JLabel();
-        idEntry = new javax.swing.JTextField();
+        codeEntry = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         deleteButton = new javax.swing.JButton();
 
@@ -26,9 +26,9 @@ public class DeleteForm extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel4.setText("Eliminar Cliente");
 
-        idEntry.setText("0");
+        codeEntry.addActionListener(this::codeEntryActionPerformed);
 
-        jLabel1.setText("ID del cliente");
+        jLabel1.setText("Codigo en arbol del cliente");
 
         deleteButton.setText("Eliminar");
         deleteButton.addActionListener(this::deleteButtonActionPerformed);
@@ -44,10 +44,10 @@ public class DeleteForm extends javax.swing.JFrame {
                         .addComponent(jLabel4))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(39, 39, 39)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
-                            .addComponent(idEntry)
-                            .addComponent(deleteButton, javax.swing.GroupLayout.DEFAULT_SIZE, 214, Short.MAX_VALUE))))
+                            .addComponent(deleteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(codeEntry, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(45, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -58,7 +58,7 @@ public class DeleteForm extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
-                .addComponent(idEntry, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(codeEntry, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26)
                 .addComponent(deleteButton)
                 .addContainerGap(64, Short.MAX_VALUE))
@@ -68,20 +68,41 @@ public class DeleteForm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
-        int id = Integer.parseInt(idEntry.getText());
-               
-        
-        
-        if(idEntry.getText().isEmpty()){
+         String code = codeEntry.getText();
+
+        if (code.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Se deben rellenar todos los campos");
-        }else{
-          System.out.println(id);  //-------Cambiar por el servicio
+            return;
+        }
+
+        try {
+            Customer searchCustomer = new Customer();
+            searchCustomer.setCode(code);
+
+            Node node = sv.searchNode(searchCustomer);
+
+            if (node == null) {
+                JOptionPane.showMessageDialog(null, "Cliente no encontrado");
+                return;
+            }
+
+            Customer customer = node.data;
+            sv.deleteNode(customer);
+
+            JOptionPane.showMessageDialog(null, "Eliminado exitosamente");
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error al eliminar: " + e.getMessage());
         }
     }//GEN-LAST:event_deleteButtonActionPerformed
 
+    private void codeEntryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_codeEntryActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_codeEntryActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField codeEntry;
     private javax.swing.JButton deleteButton;
-    private javax.swing.JTextField idEntry;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel4;
     // End of variables declaration//GEN-END:variables
