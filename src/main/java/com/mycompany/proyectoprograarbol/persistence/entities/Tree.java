@@ -6,11 +6,12 @@ import java.util.List;
 
 public class Tree {
 
-    Node raiz = null;
+   public  Node raiz = null;
     Customer c = new Customer((long) 1, "Yo", "Guatemala", "5", 5000.0);
 
-    public void insertNode(Customer customer) {
+    public Node insertNode(Customer customer) {
         raiz = insertRecursive(raiz, customer);
+        return raiz;
     }
 
     //obtener la altura del nodo
