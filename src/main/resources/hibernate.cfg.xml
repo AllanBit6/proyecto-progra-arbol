@@ -4,9 +4,9 @@
     <session-factory>
    
         <property name="jakarta.persistence.jdbc.driver">com.mysql.cj.jdbc.Driver</property>
-        <property name="jakarta.persistence.jdbc.url">jdbc:mysql://localhost:3306/Arbol</property>
+        <property name="jakarta.persistence.jdbc.url">jdbc:mysql://localhost:3306/arbol</property>
         <property name="jakarta.persistence.jdbc.user">root</property>
-        <property name="jakarta.persistence.jdbc.password">123456</property>
+        <property name="jakarta.persistence.jdbc.password">password123</property>
 
   
         <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
@@ -15,7 +15,6 @@
         <property name="hibernate.hbm2ddl.auto">update</property>
         <property name="hibernate.jdbc.batch_size">20</property>
        
-         <mapping class="com.mycompany.proyectoprograarbol.persistence.entities.Customer"/>
-        
+        <mapping class="com.mycompany.proyectoprograarbol.persistence.entities.Customer"/>
     </session-factory>
 </hibernate-configuration>
