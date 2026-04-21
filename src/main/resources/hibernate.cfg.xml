@@ -15,7 +15,6 @@
         <property name="hibernate.hbm2ddl.auto">update</property>
         <property name="hibernate.jdbc.batch_size">20</property>
        
-         <mapping class="com.mycompany.proyectoprograarbol.persistence.entities.Customer"/>
-        
+        <mapping class="com.mycompany.proyectoprograarbol.persistence.entities.Customer"/>
     </session-factory>
 </hibernate-configuration>
