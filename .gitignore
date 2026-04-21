@@ -25,3 +25,6 @@ Thumbs.db
 .idea/
 *.iml
 .vscode/
+
+#BD
+src/main/resources/hibernate.cfg.xml
