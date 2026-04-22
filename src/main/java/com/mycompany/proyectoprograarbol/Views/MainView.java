@@ -236,7 +236,7 @@ public class MainView extends javax.swing.JFrame {
     }//GEN-LAST:event_trailsButtonActionPerformed
 
     private void viewButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewButtonActionPerformed
-        RecordsForms form = new RecordsForms();
+        RecordsForms form = new RecordsForms(service);
         form.setVisible(true);
     }//GEN-LAST:event_viewButtonActionPerformed
 
