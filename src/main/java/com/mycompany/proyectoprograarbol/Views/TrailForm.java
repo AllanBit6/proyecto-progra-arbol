@@ -1,18 +1,24 @@
 package com.mycompany.proyectoprograarbol.Views;
+import com.mycompany.proyectoprograarbol.Services.TreeService;
+import com.mycompany.proyectoprograarbol.persistence.entities.*;
+import java.util.List;
+import javax.swing.JOptionPane;
 
 public class TrailForm extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(TrailForm.class.getName());
-
-    public TrailForm() {
+    TreeService sv;
+    
+    public TrailForm(TreeService service) {
         initComponents();
+        sv = service;
     }
 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        logArea = new javax.swing.JTextArea();
         enordenButton = new javax.swing.JButton();
         postordenButton = new javax.swing.JButton();
         preordenButton = new javax.swing.JButton();
@@ -20,15 +26,18 @@ public class TrailForm extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        logArea.setColumns(20);
+        logArea.setRows(5);
+        jScrollPane1.setViewportView(logArea);
 
         enordenButton.setText("Enorden");
+        enordenButton.addActionListener(this::enordenButtonActionPerformed);
 
         postordenButton.setText("Postorden");
+        postordenButton.addActionListener(this::postordenButtonActionPerformed);
 
         preordenButton.setText("Preorden");
+        preordenButton.addActionListener(this::preordenButtonActionPerformed);
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel4.setText("Recorridos");
@@ -71,11 +80,45 @@ public class TrailForm extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void enordenButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enordenButtonActionPerformed
+        logArea.setText("");
+        List<Customer>lista = sv.getInOrder();
+        String cad = "";
+        
+        for(Customer c: lista){
+            cad += c.getId() + "-" + c.getName() + "-" + c.getCode()+"\n";
+        }
+        logArea.setText(cad);
+        
+    }//GEN-LAST:event_enordenButtonActionPerformed
+
+    private void postordenButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_postordenButtonActionPerformed
+        logArea.setText("");
+        List<Customer>lista = sv.getPostOrder();
+        String cad = "";
+        
+        for(Customer c: lista){
+            cad += c.getId() + "-" + c.getName() + "-" + c.getCode()+"\n";
+        }
+        logArea.setText(cad);
+    }//GEN-LAST:event_postordenButtonActionPerformed
+
+    private void preordenButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_preordenButtonActionPerformed
+        logArea.setText("");
+        List<Customer>lista = sv.getPreOrder();
+        String cad = "";
+        
+        for(Customer c: lista){
+            cad += c.getId() + "-" + c.getName() + "-" + c.getCode()+"\n";
+        }
+        logArea.setText(cad);
+    }//GEN-LAST:event_preordenButtonActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton enordenButton;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JTextArea logArea;
     private javax.swing.JButton postordenButton;
     private javax.swing.JButton preordenButton;
     // End of variables declaration//GEN-END:variables

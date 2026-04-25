@@ -1,14 +1,50 @@
-
 package com.mycompany.proyectoprograarbol.Views;
+import com.mycompany.proyectoprograarbol.Services.TreeService;
+import com.mycompany.proyectoprograarbol.persistence.entities.*;
+import java.util.List;
+import javax.swing.JOptionPane;
 
 public class RecordsForms extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(RecordsForms.class.getName());
-
-    public RecordsForms() {
+    TreeService sv;
+    
+    public RecordsForms(TreeService service) {
         initComponents();
+        sv = service;
+
+        try {
+            List<Customer> lista = sv.getInOrder();
+            loadTable(lista);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "No se pudieron cargar los registros");
+        }
     }
 
+    
+    private void loadTable(List<Customer> lista) {
+        javax.swing.table.DefaultTableModel model = new javax.swing.table.DefaultTableModel();
+        
+
+        model.addColumn("ID");
+        model.addColumn("Nombre");
+        model.addColumn("Dirección");
+        model.addColumn("Código");
+        model.addColumn("Saldo");
+
+        for (Customer c : lista) {
+            model.addRow(new Object[]{
+                c.getId(),
+                c.getName(),
+                c.getAddress(),
+                c.getCode(),
+                c.getBalance()
+            });
+        }
+
+        jTable1.setModel(model);
+    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -61,10 +97,6 @@ public class RecordsForms extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(() -> new RecordsForms().setVisible(true));
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel4;
