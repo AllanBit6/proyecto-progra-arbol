@@ -37,6 +37,9 @@ public class TreeService  implements ITreeService{
 
     @Override
     public Node addNode(Customer customer) {
+       if(getInOrder().stream().filter(x->x.getCode().equals(customer.getCode())).findFirst().isPresent()){
+           throw new RuntimeException("Ya existe un cliente con el mismo codigo") ;
+       }
        return service.insertNode(customer);
     }
 

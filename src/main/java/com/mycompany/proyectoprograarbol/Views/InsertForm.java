@@ -120,7 +120,7 @@ public class InsertForm extends javax.swing.JFrame {
                JOptionPane.showMessageDialog(null, "Agregado exitosamente");
                this.dispose();
             }catch(Exception e){
-                JOptionPane.showMessageDialog(null, "No se pudo agregar el registro");
+                JOptionPane.showMessageDialog(null, "No se pudo agregar el registro: " + e.getMessage());
             }
             
         }
